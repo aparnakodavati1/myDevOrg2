@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HDSign%26Pay082020</fullName>
+    <types>
+        <members>RemoteTrxContractLookup</members>
+        <members>RemoteTrxContractLookupTest</members>
+        <members>RemoteTrxPDFViewerCtrl</members>
+        <members>RemoteTrxPDFViewerCtrlTest</members>
+        <members>RemoteTrxRequestCtrl</members>
+        <members>RemoteTrxRequestCtrlTest</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>RemoteTrxCustomer</members>
+        <members>RemoteTrxFlowFooter</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
+    <types>
+        <members>Remote_Transaction/Remote_Trx_Requester_Email</members>
+        <name>EmailTemplate</name>
+    </types>
+    <types>
+        <members>Remote_Trx_Texting_flow</members>
+        <name>Flow</name>
+    </types>
+    <version>48.0</version>
+</Package>

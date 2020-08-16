@@ -1,0 +1,62 @@
+.THIS.background {
+    background-image: url(/resource/RemoteTrxCustomerBackground);
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.THIS.thd-document-iframe-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+}
+
+.THIS .thd-document-iframe {
+    border-width: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.THIS.thd-page-alert-container {
+    position: fixed;
+    top: 100px; 
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(51, 51, 51, 0.75);
+}
+
+.THIS .thd-page-alert {
+    max-width: 632px;
+    padding: 16px;
+    text-align: center;
+}
+
+.THIS .thd-page-alert h1, .THIS .thd-page-alert h2, .THIS .thd-page-alert h3, .THIS .thd-page-alert p, .THIS .thd-page-alert a {
+    color: #ffffff;
+}
+
+.THIS .thd-page-alert a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.THIS .thd-page-alert-icon {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 1rem;
+}
+
+.THIS .thd-page-alert-header {
+    margin-bottom: 1rem;
+}
+
+.THIS .thd-page-alert-text {
+    
+}

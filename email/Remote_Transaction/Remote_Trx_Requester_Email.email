@@ -1,0 +1,330 @@
+<messaging:emailTemplate renderUsingSystemContextWithoutSharing="True" subject="{!relatedTo.Requester_Email_Subject__c}" recipientType="Contact" relatedToType="Remote_Transaction__c">
+   <messaging:htmlEmailBody >
+      <head>
+         <title>THD Remote Document C2A</title>
+         <style type="text/css">
+            .bodyContent{
+            font-weight: normal;
+            font-size: 14px;
+            line-height: normal;
+            font-family: 'Open Sans', arial, sans-serif;
+            font-weight:400;
+            font: Helvetica, sans-serif;
+            color: #000000;
+            }
+            * {
+            padding: 0px;
+            margin: 0px;
+            }
+            html {
+            -webkit-text-size-adjust: none;
+            -webkit-font-smoothing: antialiased;
+            }
+            a {
+            outline: 0;
+            }
+            img {
+            display: block;
+            }
+            td {
+            mso-line-height-rule: exactly;
+            }
+            .outlookFix a {
+            text-decoration: none !important;
+            }
+            /* Base Media Queries */
+            #emailService {
+            display: none;
+            }
+            @media (max-width: 480px) {
+            * {
+            -webkit-text-size-adjust: none;
+            -ms-text-size-adjust: none;
+            -webkit-font-smoothing: antialiased;
+            }
+            /*Stop iproducts from auto-resizing text*/
+            .container {
+            width: 320px !important;
+            }
+            .mob-center {
+            margin: 0 auto !important;
+            }
+            .height {
+            height: auto !important;
+            }
+            .hide {
+            display: none !important;
+            }
+            .w100P {
+            width: 100% !important;
+            height: auto !important;
+            }
+            .width {
+            width: 320px !important;
+            }
+            /*cell width adjust*/
+            .W300 {
+            width: 300px !important;
+            }
+            }
+         </style>
+      </head>
+      <body class="bodyContent" bgcolor="#ffffff" style="-webkit-text-size-adjust: none; -ms-text-size-adjust: none; -webkit-font-smoothing: antialiased; ">
+         <!--[if t]><![endif]-->
+         <!--[if t]><![endif]-->
+         <!--[if t]><![endif]-->
+         <table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" bgcolor="#ffffff" style="table-layout:fixed;">
+            <tr>
+               <td>
+                  <table cellpadding="0" cellspacing="0" border="0" align="center" width="636" bgcolor="#ffffff" class="container" style="margin:0 auto;">
+                     <tr>
+                        <td>
+                           <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                              <tr>
+                                 <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 30px;">
+                                    <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                 </td>
+                              </tr>
+                              <!-- PREHEADER -->
+                              <tr>
+                                 <td align="center" valign="top">
+                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                       <tr>
+                                          <td align="left" valign="top">
+                                             <a href="http://www.homedepot.com/services/" target="_blank">
+                                             <img src="https://homeservices--coredev1--c.cs64.content.force.com/servlet/servlet.ImageServer?id=0150q0000001qI6&oid=00D0q000000Dcch" width="117" height="56" border="0" style="border:none;"/>
+                                             </a>
+                                          </td>
+                                          <td align="right" valign="bottom">
+                                             <span>Questions? Call us at</span>
+                                             <br/>
+                                             <a href="tel:{!relatedTo.Contact_Phone__c}" style="text-decoration: none;">
+                                             <span style="color:#F96302;font-weight:600; font-size:20px;">{!relatedTo.Contact_Phone__c}</span>
+                                             </a>
+                                          </td>
+                                       </tr>
+                                    </table>
+                                 </td>
+                              </tr>
+                              <!-- PREHEADER -->
+                              <tr>
+                                 <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 30px;">
+                                    <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                 </td>
+                              </tr>
+                              <!-- START black section -->
+                              <tr>
+                                 <table class="white-table" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="background-color:#2B3134;table-layout: fixed;width: 100%;">
+                                    <tr>
+                                       <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 30px;">
+                                          <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 30px;">
+                                          <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                       </td>
+                                    </tr>
+                                    <tr>  
+                                       <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 30px; line-height: 30px;color: white;text-align: center;">
+                                          <apex:outputPanel rendered="{!IF(relatedTo.Type__c = 'Document for Signing', true, false)}">  
+                                           <img src="https://homeservices--coredev1--c.cs64.content.force.com/servlet/servlet.ImageServer?id=0150q0000001qI7&oid=00D0q000000Dcch" width="70" style="height:auto; display:inline-block; border:0;" border="0"/>
+                                          </apex:outputPanel>
+                                          <apex:outputPanel rendered="{!IF((relatedTo.Type__c = 'Payment'|| relatedTo.Type__c = 'Both Document and Payment'), true, false)}">    
+                                            <img src="https://homeservices--coredev1--c.cs64.content.force.com/servlet/servlet.ImageServer?id=0150q000000QUzI&oid=00D0q000000Dcch" width="70" style="height:auto; display:inline-block; border:0;" border="0"/>
+                                          </apex:outputPanel>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 30px;">
+                                          <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 30px; line-height: 30px;color: white;text-align: center;font-size: 16px;">
+                                          <apex:outputPanel rendered="{!IF((relatedTo.Status__c = 'Viewed' && relatedTo.Type__c = 'Document for Signing'), true, false)}">
+                                             Your document has been viewed and is awaiting acknowledgement.
+                                          </apex:outputPanel>
+                                          <apex:outputPanel rendered="{!IF((relatedTo.Status__c = 'Viewed' && relatedTo.Type__c = 'Both Document and Payment'), true, false)}">
+                                             Your document has been viewed and is awaiting acknowledgement.
+                                          </apex:outputPanel>
+                                          <apex:outputPanel rendered="{!IF((relatedTo.Status__c = 'Viewed' && relatedTo.Type__c = 'Payment'), true, false)}">
+                                             Your payment request has been viewed.
+                                          </apex:outputPanel>
+                                          <apex:outputPanel rendered="{!IF((relatedTo.Status__c = 'Accepted' && relatedTo.Type__c = 'Document for Signing'), true, false)}">
+                                             Your document has been accepted!
+                                          </apex:outputPanel>
+                                          <apex:outputPanel rendered="{!IF((relatedTo.Status__c = 'Accepted' && relatedTo.Type__c = 'Both Document and Payment'), true, false)}">
+                                             Your document has been signed and payment has been submitted!
+                                          </apex:outputPanel>
+                                          <apex:outputPanel rendered="{!IF((relatedTo.Status__c = 'Accepted' && relatedTo.Type__c = 'Payment'), true, false)}">
+                                             Payment has been submitted!
+                                          </apex:outputPanel>
+                                          <apex:outputPanel rendered="{!IF(relatedTo.Status__c = 'Rejected', true, false)}">
+                                             <apex:outputPanel rendered="{!IF(relatedTo.Reject_Reason__c = 'Request Change', true, false)}">
+                                                A change has been requested on the document.
+                                             </apex:outputPanel>
+                                             <apex:outputPanel rendered="{!IF(relatedTo.Reject_Reason__c != 'Request Change', true, false)}">
+                                                Your document has been rejected.
+                                             </apex:outputPanel>
+                                          </apex:outputPanel>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 30px;">
+                                          <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="center">
+                                          <table cellpadding="0" cellspacing="0" border="0">
+                                             <apex:outputPanel rendered="{!!relatedTo.Is_Partner_User_Request__c}">
+                                                <tr>
+                                                   <td  class="outlookFix">
+                                                      <a href="https://homeservices--coredev1.lightning.force.com/lightning/r/Remote_Transaction__c/{!relatedTo.Id}/view" style="color: #2B3134;text-decoration: none !important;" rel="noopener">
+                                                         <center><img src="https://homeservices--coredev1--c.cs64.content.force.com/servlet/servlet.ImageServer?id=0150q0000001qIB&oid=00D0q000000Dcch" width="170" height="auto" border="0" style="display:block; border:0;"/>
+                                                         </center>
+                                                      </a>
+                                                   </td>
+                                                </tr>
+                                             </apex:outputPanel>
+                                             <apex:outputPanel rendered="{!relatedTo.Is_Partner_User_Request__c}">
+                                                <tr>
+                                                   <td  class="outlookFix">
+                                                      <a href="{!$Label.Remote_Trx_Customer_Community}/ServiceProvider/s/remote-transaction/{!relatedTo.Id}" style="color: #2B3134;text-decoration: none !important;" rel="noopener">
+                                                         <center><img src="https://homeservices--coredev1--c.cs64.content.force.com/servlet/servlet.ImageServer?id=0150q0000001qIB&oid=00D0q000000Dcch" width="170" height="auto" border="0" style="display:block; border:0;"/>
+                                                         </center>
+                                                      </a>
+                                                   </td>
+                                                </tr>
+                                             </apex:outputPanel>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 30px;">
+                                          <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 30px;">
+                                          <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </tr>
+                              <!-- END black section -->
+                              <tr>
+                                 <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 30px;">
+                                    <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td align="center">
+                                    <table cellpadding="0" cellspacing="0" border="0" style="width:90%">
+                                       <tr>
+                                          <td align="left" valign="top" width="100%" height="10" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 10px;">
+                                             <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                             Hi {!relatedTo.Requester_First_Name__c},
+                                          </td>
+                                       </tr>
+                                       <tr>
+                                          <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 25px;">
+                                             <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                          </td>
+                                       </tr>
+                                       <apex:outputPanel rendered="{!IF(relatedTo.Status__c = 'Viewed', true, false)}">
+                                           <apex:outputPanel rendered="{!IF(relatedTo.Sub_Status__c = 'Pending Document Signature', true, false)}">
+                                              <tr>
+                                                 <td align="left" valign="top" width="100%" height="10" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 15px;">
+                                                    <b>{!relatedTo.Customer_FullName__c} has viewed the document(s), and it is now just awaiting their signature or rejection.</b>
+                                                 </td>
+                                              </tr>
+                                          </apex:outputPanel>
+                                          <apex:outputPanel rendered="{!IF(relatedTo.Sub_Status__c = 'Signed Document Pending Payment', true, false)}">
+                                              <tr>
+                                                 <td align="left" valign="top" width="100%" height="10" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 15px;">
+                                                    <b>{!relatedTo.Customer_FullName__c} has signed the document(s), and we are now just awaiting their payment.</b>
+                                                 </td>
+                                              </tr>
+                                          </apex:outputPanel>
+                                          <apex:outputPanel rendered="{!IF(relatedTo.Sub_Status__c = 'Pending Payment', true, false)}">
+                                              <tr>
+                                                 <td align="left" valign="top" width="100%" height="10" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 15px;">
+                                                    <b>{!relatedTo.Customer_FullName__c} has viewed payment request, and we are now just awaiting their payment.</b>
+                                                 </td>
+                                              </tr>
+                                          </apex:outputPanel>
+                                          <tr>
+                                             <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 25px;">
+                                                <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td align="left" valign="top" width="100%" height="10" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 15px;">
+                                                You can reach the Customer through {!relatedTo.Customer_Email__c}
+                                                <apex:outputPanel rendered="{!IF(NOT(ISBLANK(relatedTo.Phone_Number__c)), true, false)}">, or by calling them at <a href="tel:{!relatedTo.Phone_Number__c}" style="text-decoration: none;">
+                                                   <span style="color:#000000;">{!relatedTo.Phone_Number__c}</span></a> 
+                                                </apex:outputPanel>
+                                             </td>
+                                          </tr>
+                                       </apex:outputPanel>
+                                       <apex:outputPanel rendered="{!IF(relatedTo.Status__c = 'Accepted', true, false)}">
+                                          <tr>
+                                             <td align="left" valign="top" width="100%" height="10" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 15px;">
+                                                  <apex:outputPanel rendered="{!IF((relatedTo.Status__c = 'Accepted' && relatedTo.Type__c = 'Document for Signing'), true, false)}">
+                                                     <b>{!relatedTo.Customer_FullName__c} has viewed and accepted the document!</b> 
+                                                  </apex:outputPanel>
+                                                  <apex:outputPanel rendered="{!IF((relatedTo.Status__c = 'Accepted' && relatedTo.Type__c = 'Both Document and Payment'), true, false)}">
+                                                     <b>{!relatedTo.Customer_FullName__c} has signed the document(s) and successfuly submited their payment!</b> 
+                                                  </apex:outputPanel>
+                                                  <apex:outputPanel rendered="{!IF((relatedTo.Status__c = 'Accepted' && relatedTo.Type__c = 'Payment'), true, false)}">
+                                                     <b>{!relatedTo.Customer_FullName__c} has successfuly submited their payment!</b> 
+                                                  </apex:outputPanel>
+                                                
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 25px;">
+                                                <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td align="left" valign="top" width="100%" height="10" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 15px;">
+                                                Please follow up with the Customer to go over the next steps and what they can expect. You can reach the Customer through {!relatedTo.Customer_Email__c}
+                                                <apex:outputPanel rendered="{!IF(NOT(ISBLANK(relatedTo.Phone_Number__c)), true, false)}">, or by calling them at <a href="tel:{!relatedTo.Phone_Number__c}" style="text-decoration: none;">
+                                                   <span style="color:#000000;">{!relatedTo.Phone_Number__c}</span></a> 
+                                                </apex:outputPanel>
+                                             </td>
+                                          </tr>
+                                       </apex:outputPanel>
+                                       <apex:outputPanel rendered="{!IF(relatedTo.Status__c = 'Rejected', true, false)}">
+                                          <c:RemoteTrxRequesterEmailCmp rejectReason="{!relatedTo.Reject_Reason__c}" rejectDetails="{!relatedTo.Reject_Details__c}" 
+                                                phoneNumber="{!relatedTo.Phone_Number__c}" email="{!relatedTo.Customer_Email__c}" 
+                                                customerFullName="{!relatedTo.Customer_FullName__c}"/>
+                                       </apex:outputPanel>
+                                       <tr>
+                                          <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 30px;">
+                                             <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                          </td>
+                                       </tr>
+                                    </table>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td align="left" valign="top" width="100%" height="30" style="border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 25px;">
+                                    <!--[if gte mso 15]>&nbsp;<![endif]-->
+                                 </td>
+                              </tr>
+                              <!-- FOOTER -->
+                              <!-- FOOTER -->
+                           </table>
+                        </td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+         </table>
+      </body>
+   </messaging:htmlEmailBody>
+</messaging:emailTemplate>

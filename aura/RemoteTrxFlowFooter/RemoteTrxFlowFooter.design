@@ -1,0 +1,14 @@
+<design:component>
+    <design:attribute name="stages" label="Stages" 
+                      description="What stages are active"/>
+    <design:attribute name="currentStage" label="Current Stage" 
+                      description="What is the current stage?"/>
+    <design:attribute name="isLastScreen" label="Last Screen indicator" />
+    <design:attribute name="transactionStatus" label="Transaction status" />
+    <design:attribute name="isSaveAndSendClicked" label="Save And Send Clicked" 
+                      description="Checked if Requester clicks Save and Send on Last Screen"/>
+    <design:attribute name="recordId" label="Record Id" 
+                      description="Remote Transaction Record Id"/>
+    <design:attribute name="isProgressIndicatorVisible" label="Display Progress Stages"
+                      description="Flag to hide and show Stages" />
+</design:component>

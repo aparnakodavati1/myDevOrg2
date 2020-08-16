@@ -1,0 +1,286 @@
+<aura:component implements="lightning:availableForFlowScreens" access="global" controller="RemoteTrxRequestCtrl">
+
+    <!-- Determine which actions are available -->
+    <aura:attribute name="canPause" type="Boolean" />
+    <aura:attribute name="canBack" type="Boolean" />
+    <aura:attribute name="canNext" type="Boolean" />
+    <aura:attribute name="canFinish" type="Boolean" />
+    <!-- Attributes that store $Flow.ActiveStages and $Flow.CurrentStage -->
+    <aura:attribute name="stages" type="String[]" />
+    <aura:attribute name="currentStage" type="String" />
+    <aura:attribute name="transactionStatus" type="String" />
+    <aura:attribute name="isLastScreen" type="boolean" default="false" />
+    <aura:attribute name="isSaveAndSendClicked" type="boolean" default="false" />
+    <aura:attribute name="recordId" type="String" description="Remote Transaction Record Id" />
+    <aura:attribute name="isViewedInCommunity" type="Boolean" default="false"
+        description="Flag set to true if componente is loded in community" />
+    <aura:attribute name="isProgressIndicatorVisible" type="Boolean" default="true"
+        description="Flag to hide and show progress indicator" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+
+    <lightning:navigation aura:id="navService" />
+
+    <div aura:id="actionButtonBar" class="slds-clearfix slds-p-top_medium">
+        <!-- If Previous is available, display to the left -->
+        <aura:if isTrue="{!$Browser.formFactor == 'DESKTOP'}">
+            <div class="slds-grid slds-wrap">
+
+                <div class="slds-col slds-size_3-of-12">
+                    <div class="slds-float_left">
+                        <aura:if isTrue="{!v.canBack}">
+                            <lightning:button aura:id="BACK" label="Previous" variant="neutral"
+                                onclick="{!c.onButtonPressed}" />
+                        </aura:if>
+                        <lightning:button aura:id="CANCEL" label="Cancel" variant="neutral"
+                            onclick="{!c.handleCancel}" />
+                    </div>
+                </div>
+
+                <div class="slds-col slds-size_6-of-12">
+                    <aura:if isTrue="{!v.isProgressIndicatorVisible}">
+                        <div class="">
+                            <article class="slds-card">
+                                <lightning:progressIndicator aura:id="progressIndicator" currentStep="{!v.currentStage}"
+                                    type="base" variant="base" />
+                            </article>
+                        </div>
+                    </aura:if>
+                </div>
+                <div class="slds-col slds-size_3-of-12">
+                    <div class="slds-float_right">
+                        <!-- If Pause, Next, or Finish are available, display to the right -->
+                        <aura:if isTrue="{!v.canPause}">
+                            <lightning:button aura:id="PAUSE" label="Pause" variant="neutral"
+                                onclick="{!c.onButtonPressed}" />
+                        </aura:if>
+                        <aura:if isTrue="{!!v.isLastScreen}">
+                            <lightning:button aura:id="NEXT" label="Next" variant="brand"
+                                onclick="{!c.onButtonPressed}" />
+                        </aura:if>
+                        <aura:if isTrue="{!v.isLastScreen}">
+                            <lightning:button aura:id="NEXT" label="Save" name="Save" variant="brand"
+                                onclick="{!c.onButtonPressed}" />
+                            <lightning:button aura:id="NEXT" label="Send" name="Send" variant="brand"
+                                onclick="{!c.onButtonPressed}" />
+                        </aura:if>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+
+
+
+        <!--Mobile or IPAD-->
+
+        <aura:if isTrue="{!$Browser.formFactor == 'PHONE'}">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-grid_align-center slds-size_12-of-12">
+                    <aura:if isTrue="{!v.isProgressIndicatorVisible}">
+                        <div class="indicatorPadding">
+                            <article class="slds-card">
+                                <lightning:progressIndicator aura:id="progressIndicator" currentStep="{!v.currentStage}"
+                                    type="base" variant="base" />
+                            </article>
+                        </div>
+                    </aura:if>
+                </div>
+            </div>
+
+                <aura:if isTrue="{!!v.isLastScreen}">
+                    <div class="slds-grid slds-wrap">
+                        <aura:if isTrue="{!v.canBack}">
+                            <div class="slds-col slds-size_4-of-12 slds-medium-size_2-of-12">
+                                <div class="slds-float_left ">
+                                    <lightning:button aura:id="BACK" label="Previous" variant="base"
+                                                      onclick="{!c.onButtonPressed}" />
+                                </div>  
+                            </div>
+                        </aura:if>
+                        <div class="slds-col slds-size_4-of-12 slds-medium-size_2-of-12">
+                            <div class="slds-float_left">
+                                <lightning:button aura:id="CANCEL" label="Cancel" variant="base"
+                                    onclick="{!c.handleCancel}" />
+                            </div>
+                        </div>
+                        <aura:if isTrue="{!!v.canBack}">
+                             <div class="slds-col slds-size_4-of-12 slds-medium-size_2-of-12">
+                            </div>
+                        </aura:if>
+                        <div class="slds-col slds-size_4-of-12 slds-medium-size_8-of-12">
+                          <div class="slds-float_right">
+                            <!-- If Pause, Next, or Finish are available, display to the right -->
+                            <aura:if isTrue="{!v.canPause}">
+                                <lightning:button aura:id="PAUSE" label="Pause" variant="neutral"
+                                    onclick="{!c.onButtonPressed}" />
+                            </aura:if>
+                            <aura:if isTrue="{!!v.isLastScreen}">
+                                <lightning:button aura:id="NEXT" label="Next" variant="brand"
+                                    onclick="{!c.onButtonPressed}" />
+                            </aura:if>
+                            <aura:if isTrue="{!v.isLastScreen}">
+                                <lightning:button aura:id="NEXT" label="Save" name="Save" variant="neutral"
+                                    onclick="{!c.onButtonPressed}" />
+
+                                <lightning:button aura:id="NEXT" label="Send" name="Send" variant="brand"
+                                    onclick="{!c.onButtonPressed}" />
+                            </aura:if>
+                        </div>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.isLastScreen}">
+                   <div class="slds-grid slds-wrap">
+                       <aura:if isTrue="{!v.canBack}">
+                        <div class="slds-col slds-size_6-of-12 slds-medium-size_2-of-12">
+                            <div class="slds-float_left ">
+                                <lightning:button aura:id="BACK" label="Previous" variant="neutral"
+                                                  onclick="{!c.onButtonPressed}" />
+                            </div>
+                        </div>
+                       </aura:if>
+                       <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-float_right">
+                            <!-- If Pause, Next, or Finish are available, display to the right -->
+                            <aura:if isTrue="{!v.canPause}">
+                                <lightning:button aura:id="PAUSE" label="Pause" variant="neutral"
+                                    onclick="{!c.onButtonPressed}" />
+                            </aura:if>
+                            <aura:if isTrue="{!v.isLastScreen}">
+                        <!--        <lightning:button aura:id="NEXT" label="Save" name="Save" variant="neutral"
+                                    onclick="{!c.onButtonPressed}" /> -->
+                                 <lightning:button aura:id="NEXT" label="Send" name="Send" variant="brand"
+                                    onclick="{!c.onButtonPressed}" />
+                            </aura:if>
+    
+                           </div>
+                        </div>
+                       
+                    </div><br/>
+                    <div class="slds-grid slds-wrap">
+
+                        <div class="slds-col slds-size_6-of-12 slds-medium-size_2-of-12">
+                            <div class="slds-float_left">
+                                <lightning:button aura:id="CANCEL" label="Cancel" variant="neutral"
+                                    onclick="{!c.handleCancel}" />
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-float_right">
+                   <!--             <lightning:button aura:id="NEXT" label="Send" name="Send" variant="brand"
+                                    onclick="{!c.onButtonPressed}" /> -->
+                                <lightning:button aura:id="NEXT" label="Save" name="Save" variant="neutral"
+                                    onclick="{!c.onButtonPressed}" />
+                            </div>
+                       </div>
+                    </div>
+                </aura:if>
+
+        </aura:if>
+   
+    <!-- End of IPAD -->
+        
+        <!--Mobile -->
+         <aura:if isTrue="{!$Browser.formFactor == 'TABLET'}">
+
+            <div class="slds-grid slds-wrap">
+
+                <div class="slds-col slds-grid_align-center slds-size_12-of-12">
+                    <aura:if isTrue="{!v.isProgressIndicatorVisible}">
+                        <div class="indicatorPadding">
+                            <article class="slds-card">
+                                <lightning:progressIndicator aura:id="progressIndicator" currentStep="{!v.currentStage}"
+                                    type="base" variant="base" />
+                            </article>
+                        </div>
+                    </aura:if>
+                </div>
+            </div>
+
+                <aura:if isTrue="{!!v.isLastScreen}">
+                    <div class="slds-grid slds-wrap">
+                        <aura:if isTrue="{!v.canBack}">
+                            <div class="slds-col slds-size_4-of-12 slds-medium-size_2-of-12">
+                                <div class="slds-float_left ">
+                                    <lightning:button aura:id="BACK" label="Previous" variant="base"
+                                                      onclick="{!c.onButtonPressed}" />
+                                </div>  
+                            </div>
+                        </aura:if>
+                        <div class="slds-col slds-size_4-of-12 slds-medium-size_2-of-12">
+                            <div class="slds-float_left">
+                                <lightning:button aura:id="CANCEL" label="Cancel" variant="base"
+                                    onclick="{!c.handleCancel}" />
+                            </div>
+                        </div>
+                        <aura:if isTrue="{!!v.canBack}">
+                             <div class="slds-col slds-size_4-of-12 slds-medium-size_2-of-12">
+                            </div>
+                        </aura:if>
+                        <div class="slds-col slds-size_4-of-12 slds-medium-size_8-of-12">
+                          <div class="slds-float_right">
+                            <!-- If Pause, Next, or Finish are available, display to the right -->
+                            <aura:if isTrue="{!v.canPause}">
+                                <lightning:button aura:id="PAUSE" label="Pause" variant="neutral"
+                                    onclick="{!c.onButtonPressed}" />
+                            </aura:if>
+                            <aura:if isTrue="{!!v.isLastScreen}">
+                                <lightning:button aura:id="NEXT" label="Next" variant="brand"
+                                    onclick="{!c.onButtonPressed}" />
+                            </aura:if>
+                            <aura:if isTrue="{!v.isLastScreen}">
+                                <lightning:button aura:id="NEXT" label="Save" name="Save" variant="neutral"
+                                    onclick="{!c.onButtonPressed}" />
+
+                                <lightning:button aura:id="NEXT" label="Send" name="Send" variant="brand"
+                                    onclick="{!c.onButtonPressed}" />
+                            </aura:if>
+                        </div>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.isLastScreen}">
+                   <div class="slds-grid slds-wrap">
+                       <aura:if isTrue="{!v.canBack}">
+                        <div class="slds-col slds-size_3-of-12 slds-medium-size_2-of-12">
+                            <div class="slds-float_left ">
+                                <lightning:button aura:id="BACK" label="Previous" variant="base"
+                                                  onclick="{!c.onButtonPressed}" />
+                            </div>
+                        </div>
+                       </aura:if>
+                       <div class="slds-col slds-size_3-of-12 slds-medium-size_2-of-12">
+                            <div class="slds-grid_align-center">
+                                <lightning:button aura:id="CANCEL" label="Cancel" variant="base"
+                                    onclick="{!c.handleCancel}" />
+                            </div>
+                        </div>
+                       <div class="slds-col slds-size_3-of-12 slds-medium-size_6-of-12">
+                             <!-- If Pause, Next, or Finish are available, display to the right -->
+                            <aura:if isTrue="{!v.canPause}">
+                                <lightning:button aura:id="PAUSE" label="Pause" variant="neutral"
+                                    onclick="{!c.onButtonPressed}" />
+                            </aura:if>
+                            <aura:if isTrue="{!v.isLastScreen}">
+                                <div class="slds-float_right ">
+                                  <lightning:button aura:id="NEXT" label="Save" name="Save" variant="neutral"
+                                    onclick="{!c.onButtonPressed}" />
+                                </div>
+                            </aura:if>
+                        </div>
+                        <div class="slds-col slds-size_3-of-12 slds-medium-size_2-of-12">
+                           <div class="slds-float_right">
+                                <lightning:button aura:id="NEXT" label="Send" name="Send" variant="brand"
+                                    onclick="{!c.onButtonPressed}" />
+                            </div>
+                            
+                        </div>
+                    </div>
+                   
+                </aura:if>
+
+        </aura:if>
+    </div>
+    
+</aura:component>

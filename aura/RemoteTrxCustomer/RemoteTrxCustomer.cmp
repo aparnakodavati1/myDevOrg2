@@ -1,0 +1,104 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:isUrlAddressable" 
+                controller = "RemoteTrxPDFViewerCtrl"
+                access="global" >
+    
+    <aura:attribute name="currentTrx" type="String"/>
+    <aura:attribute name="status" type="String"/>
+    <aura:attribute name="rejectReason" type="String"/>
+    <aura:attribute name="isExpired" type="Boolean"/>
+    <aura:attribute name="contactPhone" type="String"/>
+    <aura:attribute name="error" type="String"/>
+	<aura:attribute name="requestType" type="String"/>
+    <aura:attribute name="vfHost" type="String"
+                    default="https://coredev-homeservices.cs14.force.com"/>
+    
+    <lightning:navigation aura:id="navService"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:if isTrue="{!v.isExpired}">
+        <div class="background"></div>
+        <c:RemoteTrxHeader></c:RemoteTrxHeader>
+        <div class="slds-align_absolute-center thd-page-alert-container">
+            <div class="thd-page-alert">
+                <img id="accepted-page-alert-icon" class="thd-page-alert-icon" src="{!$Resource.IconErrorCircle}"/>
+                <h2>Expired Link!</h2>
+                <br />
+                <p>Sorry, but it looks like this link is expired.
+                    <br /><br />If you have any questions, please contact <a href="{!'tel:' + v.contactPhone}">{!v.contactPhone}</a>.</p>
+            </div>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.status &amp;&amp; !v.error &amp;&amp; !v.isExpired &amp;&amp; v.status == 'Accepted'}">
+        <div class="background"></div>
+        <c:RemoteTrxHeader></c:RemoteTrxHeader>
+        <div class="slds-align_absolute-center thd-page-alert-container">
+            <div class="thd-page-alert">
+                <img id="accepted-page-alert-icon" class="thd-page-alert-icon" src="{!$Resource.IconErrorCircle}"/>
+                <h2>Already Accepted!</h2>
+                <br />
+                <p>Sorry, but it looks like you have already viewed and accepted the document.
+                    <br /><br />If you have any questions, please contact <a href="{!'tel:' + v.contactPhone}">{!v.contactPhone}</a>.</p>
+            </div>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.status &amp;&amp; !v.error &amp;&amp; !v.isExpired &amp;&amp; v.status == 'Rejected'}">
+        <div class="background"></div>
+        <c:RemoteTrxHeader></c:RemoteTrxHeader>
+        <div class="slds-align_absolute-center thd-page-alert-container">
+            <div class="thd-page-alert">
+                <img id="accepted-page-alert-icon" class="thd-page-alert-icon" src="{!$Resource.IconErrorCircle}"/>
+                <h2>Already Rejected!</h2>
+                <br />
+                <p>Sorry, but it looks like you have already viewed and rejected the document.
+                    <br /><br />If you have any questions, please contact <a href="{!'tel:' + v.contactPhone}">{!v.contactPhone}</a>.</p>
+            </div>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.status &amp;&amp; !v.error &amp;&amp; !v.isExpired &amp;&amp; v.status == 'Edit in Progress'}">
+        <div class="background"></div>
+        <c:RemoteTrxHeader></c:RemoteTrxHeader>
+        <div class="slds-align_absolute-center thd-page-alert-container">
+            <div class="thd-page-alert">
+                <img id="accepted-page-alert-icon" class="thd-page-alert-icon" src="{!$Resource.IconErrorCircle}"/>
+                <h2>Edit in Progress!</h2>
+                <br />
+                <p>Sorry, but it looks like this page is currently being edited.
+                    <br /><br />Please wait until the edit is complete before returning to this page.
+                	<br />You will get notified when the edit is complete.</p>
+            </div>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.status &amp;&amp; !v.error &amp;&amp; !v.isExpired &amp;&amp; v.status != 'Accepted' &amp;&amp; v.status != 'Rejected' &amp;&amp; v.status != 'Edit in Progress'}">
+        <div class="slds-p-around_small thd-document-iframe-container" >
+            <iframe class="thd-document-iframe" src="{!$Label.c.Remote_Trx_Customer_Community +'/CustomerCommunity/RemoteTrxPDFViewer?currentTrx='+v.currentTrx }" />
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.error &amp;&amp; v.error == 'ERROR'}">
+        <div class="background"></div>
+        <c:RemoteTrxHeader></c:RemoteTrxHeader>
+        <div class="slds-align_absolute-center thd-page-alert-container">
+            <div class="thd-page-alert">
+                <img id="accepted-page-alert-icon" class="thd-page-alert-icon" src="{!$Resource.IconErrorCircle}"/>
+                <h2>Cannot Load App!</h2>
+                <br />
+                <p class="slds-text-heading_small thd-page-alert-text">Sorry, but we are having a hard time loading this page.
+                    <br />Please try again.
+                    <br /><br />If you continue to face this issue, please reach out to our support team through <a href="mailto:hdsignandpay_support@homedepot.com">hdsignandpay_support@homedepot.com</a>.</p>
+            </div>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.error &amp;&amp; v.error == 'INCOMPLETE'}">
+        <c:RemoteTrxHeader></c:RemoteTrxHeader>
+        <div class="slds-align_absolute-center thd-page-alert-container">
+            <div class="thd-page-alert">
+                <img id="accepted-page-alert-icon" class="thd-page-alert-icon" src="{!$Resource.IconErrorCircle}"/>
+                <h2>Cannot Load App!</h2>
+                <br />
+                <p class="slds-text-heading_small thd-page-alert-text">Sorry, but we are having a hard time loading this page.
+                    <br />Please try again.
+                    <br /><br />If you continue to face this issue, please reach out to our support team through <a href="mailto:hdsignandpay_support@homedepot.com">hdsignandpay_support@homedepot.com</a>.</p>
+            </div>
+        </div>
+    </aura:if>
+</aura:component>
